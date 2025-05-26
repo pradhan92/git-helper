@@ -1,0 +1,73 @@
+# ----------------------------------------
+# 📁 STEP 0: Navigate to your project directory
+# ----------------------------------------
+cd /path/to/your/project
+
+# ----------------------------------------
+# 🧼 STEP 1: Clean up any existing Git remote
+# ----------------------------------------
+git remote remove origin       # Remove old remote (if exists)
+git remote -v                  # Confirm no remotes are listed
+
+# ----------------------------------------
+# 🛠️ STEP 2: Initialize Git and make the first commit
+# ----------------------------------------
+echo "# ptc-main-withAPIs-" >> README.md     # Create a README
+git init                                     # Initialize Git repository
+git add README.md                            # Stage README
+git commit -m "Initial commit with README"   # Commit README
+
+# ----------------------------------------
+# 🌿 STEP 3: Create main branch and add GitHub remote
+# ----------------------------------------
+git branch -M main
+git remote add origin https://github.com/pradhan92/ptc-main-withAPIs-.git
+
+# ----------------------------------------
+# ⬆️ STEP 4: Push main branch to GitHub
+# ----------------------------------------
+git push -u origin main   # Push to GitHub and set upstream
+
+# ----------------------------------------
+# 📄 STEP 5: Add a new file to main and push
+# ----------------------------------------
+touch script.js
+echo "console.log('Main ready');" > script.js
+git add script.js
+git commit -m "Add script.js"
+git push origin main
+
+# ----------------------------------------
+# 🌱 STEP 6: Create and switch to a feature branch
+# ----------------------------------------
+git checkout -b feature-ui-update
+
+# ----------------------------------------
+# 🧱 STEP 7: Add or update files in the feature branch
+# ----------------------------------------
+echo "<div>New UI Element</div>" > ui.html
+git add ui.html
+git commit -m "Add ui.html with new UI component"
+
+# ----------------------------------------
+# 🚀 STEP 8: Push the feature branch to GitHub
+# ----------------------------------------
+git push -u origin feature-ui-update
+
+# ----------------------------------------
+# 🔁 STEP 9: Merge the feature branch into main
+# ----------------------------------------
+git checkout main         # Switch back to main
+git pull origin main      # Pull the latest changes (if any)
+git merge feature-ui-update   # Merge feature branch
+
+# ----------------------------------------
+# ⬆️ STEP 10: Push the merged changes to GitHub
+# ----------------------------------------
+git push origin main
+
+# ----------------------------------------
+# 🧹 STEP 11: Delete feature branch (optional cleanup)
+# ----------------------------------------
+git branch -d feature-ui-update             # Delete branch locally
+git push origin --delete feature-ui-update  # Delete branch from GitHub

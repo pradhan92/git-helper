@@ -1,0 +1,60 @@
+# ----------------------------------------
+# 🧼 Step 1: Clean up any existing Git remote
+# ----------------------------------------
+git remote remove origin    # Remove the old remote if it exists
+git remote -v               # Confirm no remotes are listed
+
+# ----------------------------------------
+# 🛠️ Step 2: Initialize a new Git repository
+# ----------------------------------------
+echo "# ptc-main-withAPIs-" >> README.md  # Create a README
+git init                                 # Initialize Git
+git add README.md                        # Stage the README
+git commit -m "first commit"             # Commit the README
+
+# ----------------------------------------
+# 🌿 Step 3: Create main branch & add remote
+# ----------------------------------------
+git branch -M main   # Rename current branch to main
+git remote add origin https://github.com/pradhan92/ptc-main-withAPIs-.git
+
+# ----------------------------------------
+# ⬆️ Step 4: Push to GitHub
+# ----------------------------------------
+git push -u origin main   # Push to GitHub and set upstream to origin/main
+
+# ----------------------------------------
+# 📄 Step 5: Add a new file
+# ----------------------------------------
+touch new-feature.js            # Create a new file (replace with your filename)
+git add new-feature.js          # Stage the new file
+git commit -m "Add new-feature.js"  # Commit it
+git push origin main            # Push to remote main branch
+
+# ----------------------------------------
+# 🌱 Step 6: Create and switch to a new feature branch
+# ----------------------------------------
+git checkout -b feature-branch     # Create & switch to new branch
+
+# Make edits or add files in this branch...
+
+touch feature-helper.js            # Example: add another file
+git add feature-helper.js
+git commit -m "Add helper function to feature branch"
+git push -u origin feature-branch  # Push the new branch to GitHub
+
+# ----------------------------------------
+# 🔁 Step 7: Merge feature branch into main
+# ----------------------------------------
+git checkout main                  # Switch back to main branch
+git pull origin main               # Make sure it's up to date
+git merge feature-branch           # Merge feature branch into main
+
+# ----------------------------------------
+# ⬆️ Step 8: Push merged result to GitHub
+# ----------------------------------------
+git push origin main               # Push updated main branch
+
+# (Optional) Delete branch locally & remotely
+git branch -d feature-branch
+git push origin --delete feature-branch
