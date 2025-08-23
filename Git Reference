@@ -1,38 +1,40 @@
 Complete Git Reference & Nested Project Fix
  1. Git Basics
-  # Initialize git in a folder
-    git init
+    A.Create a new repository on the command line
+      git init                        # Initialize a new Git repository in the current folder
+      git add .                       # Stage the README.md file for commit
+      git commit -m "first commit"    # Commit the staged file with a message
+      git branch -M main              # Rename the default branch to 'main'
+      git remote add origin https://github.com/your-git-user-name/git-repo-name.git  # Add remote repository URL named 'origin'
+      git push -u origin main         # Push commits to the remote 'main' branch and set upstream
 
-  # Check status
-    git status
 
 
- Configure User
+    B.Push an existing repository from the command line
+       git remote add origin //github.com/your-git-user-name/git-repo-name.git  # Link local repo to remote GitHub repository
+       git branch -M main    # Rename default branch to 'main'
+       git push -u origin main   # Push existing commits to remote and set upstream
 
-```powershell
-git config --global user.name "Your Name"
-git config --global user.email "youremail@example.com"
-git config --list
-```
 
- Basic Workflow
+     c.Configure User
+        git config --global user.name "Your Name"               # Set your Git username globally
+        git config --global user.email "youremail@example.com"  # Set your Git email globally
+        git config --list                                       # View all Git configuration settings
 
-```powershell
-git add .                 Stage all changes
-git commit -m "message"   Commit staged changes
-git push origin main      Push to remote
-git pull origin main      Pull latest changes
-```
+     D.Basic Workflow
+        git add .                 # Stage all changes in the repository for commit
+        git commit -m "message"   # Commit staged changes with a descriptive message
+        git push origin main      # Push local commits to the remote 'main' branch
+        git pull origin main      # Pull latest changes from remote to local repository
 
----
 
  2. Branching
-          git branch                List branches
-          git branch new-feature    Create branch
-          git checkout new-feature  Switch branch
-          git checkout -b new-feature  Create & switch
-          git merge feature         Merge branch
-          git branch -d feature     Delete branch
+          git branch                    List branches
+          git branch new-feature        Create branch
+          git checkout new-feature      Switch branch
+          git checkout -b new-feature   Create & switch
+          git merge feature             Merge branch
+          git branch -d feature         Delete branch
 
  3. Remote Repositories
           git remote add origin <repo_url>   Add remote
@@ -87,7 +89,6 @@ git pull origin main      Pull latest changes
 
 ✅ Now `project_3` and `project_4` behave as normal folders, all files tracked, visible on GitHub.
 
----
 
  8. Full Git Workflow Example for React Projects
     # Initialize repository
