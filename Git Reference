@@ -1,0 +1,176 @@
+Complete Git Reference & Nested Project Fix
+ 1. Git Basics
+  # Initialize git in a folder
+    git init
+
+  # Check status
+    git status
+
+
+ Configure User
+
+```powershell
+git config --global user.name "Your Name"
+git config --global user.email "youremail@example.com"
+git config --list
+```
+
+ Basic Workflow
+
+```powershell
+git add .                 Stage all changes
+git commit -m "message"   Commit staged changes
+git push origin main      Push to remote
+git pull origin main      Pull latest changes
+```
+
+---
+
+ 2. Branching
+          git branch                List branches
+          git branch new-feature    Create branch
+          git checkout new-feature  Switch branch
+          git checkout -b new-feature  Create & switch
+          git merge feature         Merge branch
+          git branch -d feature     Delete branch
+
+ 3. Remote Repositories
+          git remote add origin <repo_url>   Add remote
+          git remote -v                      List remotes
+          git push -u origin main            Push and set upstream
+
+ 4. Undo / Reset
+        git restore <file>              Discard working changes
+        git restore --staged <file>     Unstage file
+        git reset --soft HEAD~1         Undo last commit (keep changes)
+        git reset --hard HEAD~1         Undo last commit & discard changes
+
+ 5. Git Logs
+        git log               Full history
+        git log --oneline     Short history
+        git log -p            Show diffs
+
+ 6. .gitignore
+      node_modules/
+        dist/
+        .env
+        *.log
+
+
+ 7. Nested Git Projects Issue
+     Problem :- Adding existing Git repositories (`project_3`, `project_4`) into a parent repository may produce:
+            create mode 160000 project_3
+            create mode 160000 project_4
+
+     Why It Happens
+          1. Nested projects contain their own `.git` folders
+          2. Git assumes you want submodules, not normal folders
+          3. Adding directly triggers submodule tracking
+ Solution: Convert Submodules to Normal Folders
+
+ Step 1: Remove Inner `.git` Folders
+          Remove-Item -Recurse -Force project_3\.git
+          Remove-Item -Recurse -Force project_4\.git
+
+ Step 2: Remove Git Index References
+          git rm --cached project_3
+          git rm --cached project_4
+
+ Step 3: Add as Normal Folders
+         git add project_3 project_4
+
+ Step 4: Commit
+        git commit -m "Convert nested projects to normal folders"
+
+ Step 5: Push
+      git push origin main
+
+✅ Now `project_3` and `project_4` behave as normal folders, all files tracked, visible on GitHub.
+
+---
+
+ 8. Full Git Workflow Example for React Projects
+    # Initialize repository
+        git init
+    
+    # Stage files
+        git add .
+    
+    # Commit changes
+        git commit -m "Initial commit"
+    
+    # Add remote
+        git remote add origin https://github.com/pradhan92/react-book.git
+    
+    # Push to main branch
+        git push -u origin main
+
+
+ Fix Nested Projects (project\_3 & project\_4)
+    # Remove inner git folders
+      Remove-Item -Recurse -Force project_3\.git, project_4\.git
+    
+    # Remove gitlinks
+      git rm --cached project_3, project_4
+    
+    # Add as normal folders
+      git add project_3 project_4
+    
+    # Commit & push
+      git commit -m "Convert nested projects to normal folders"
+      git push origin main
+
+
+ 9. all Git commands for creating a branch, making changes, pushing, and creating a pull request
+    # 1. Check current branch
+          git branch
+    
+    # 2. Create a new branch and switch to it
+          git checkout -b feature-branch
+    
+    # 3. Make changes in your files (edit/add/delete)
+    
+    # 4. Stage all changes
+          git add .
+    
+    # 5. Commit the changes
+          git commit -m "Add new feature XYZ"
+    
+    # 6. Push the branch to GitHub and set upstream
+          git push -u origin feature-branch
+    
+    # 7. On GitHub: create a Pull Request from 'feature-branch' to 'main'
+    
+    # 8. After PR is merged, switch back to main branch
+          git checkout main
+    
+    # 9. Pull latest changes from remote main
+          git pull origin main
+    
+    # 10. Optional: delete the local branch if done
+          git branch -d feature-branch
+    
+    # 11. Optional: delete remote branch if done
+          git push origin --delete feature-branch
+
+
+
+ 10. Common Git Errors & Fixes
+
+| Error                          | Cause                    | Fix                                      |
+| ------------------------------ | ------------------------ | ---------------------------------------- |
+| `create mode 160000 project_4` | Nested Git repo detected | Remove inner `.git` and re-add normally  |
+| `! [rejected]` push            | Non-fast-forward         | `git pull --rebase` then `git push`      |
+| LF → CRLF warning              | Windows line endings     | `git config --global core.autocrlf true` |
+
+
+11. Tips & Best Practices
+
+1. Avoid nested `.git` directories unless using submodules intentionally.
+2. Use `.gitignore` for node\_modules, logs, env files.
+3. Always commit small, meaningful changes.
+4. Pull before pushing to avoid conflicts.
+5. Use branches for features and merge into main when ready.
+6. Keep commit messages clear and consistent.
+
+
