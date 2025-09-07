@@ -1,0 +1,43 @@
+Creating a Git branch and a pull request step by step.
+
+1️⃣ Create a new branch
+
+From your project root, run:
+
+git checkout -b feature/TW-186
+checkout -b → creates a new branch and switches to it.
+
+feature/TW-186 → your branch name.
+
+2️⃣ Make your changes
+
+Edit your files as needed. Then stage and commit:
+
+git add .
+git commit -m "TW-186: Your commit message here"
+3️⃣ Push the branch to remote
+
+git push origin feature/TW-186
+This uploads your branch to GitHub (or your Git remote).
+
+4️⃣ Create a Pull Request (PR)
+
+You have two options:
+
+Option A: Using GitHub website
+
+Go to your repository on GitHub.
+
+You should see a prompt: “Compare & pull request” for your new branch.
+
+Click it → fill title/description → create PR.
+
+Option B: Using GitHub CLI (if installed)
+
+gh pr create --base main --head feature/TW-186 --title "TW-186: Your title" --body "Description of changes"
+--base main → the branch you want to merge into (often main or develop).
+
+--head feature/TW-186 → your branch.
+
+After this, your branch is on GitHub and the PR is ready for review. ✅
+
