@@ -41,3 +41,9 @@ gh pr create --base main --head feature/TW-186 --title "TW-186: Your title" --bo
 
 After this, your branch is on GitHub and the PR is ready for review. ✅
 
+####✅Add a NEW project to an existing Git repo (main branch or old branch)✅####
+git status
+git add project-name
+git commit -m "Add new project files"
+git push
+
